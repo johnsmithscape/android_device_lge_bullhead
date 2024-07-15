@@ -51,7 +51,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/lge/bullhead/audio_effects.conf:system/etc/audio_effects.conf \
+    device/lge/bullhead/audio_effects.conf:vendor/etc/audio_effects.conf \
     device/lge/bullhead/mixer_paths.xml:system/etc/mixer_paths.xml \
     device/lge/bullhead/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/lge/bullhead/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
@@ -544,6 +544,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
+#Vendor Patch Level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2018-12-05
+
 # Modem debugger/misc
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 ifeq (,$(filter aosp_bullhead, $(TARGET_PRODUCT)))
@@ -572,7 +576,7 @@ ifeq ($(TARGET_BUILD_VARIANT),user)
 
 # setup dm-verity configs.
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/system
-#PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/vendor
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc.0/f9824900.sdhci/by-name/vendor
 $(call inherit-product, build/target/product/verity.mk)
 endif
 
